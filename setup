@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "=== ENV COPY ==="
+cp .env.example .env
+
+echo "=== DOCKER UP ==="
+docker compose -f compose.dev.yaml up -d
+
+echo "=== COMPOSER INSTALL ==="
+docker compose -f compose.dev.yaml exec workspace composer install
+
+echo "=== NPM INSTALL ==="
+docker compose -f compose.dev.yaml exec workspace npm install
+
+echo "=== APP KEY GENERATE ==="
+docker compose -f compose.dev.yaml exec workspace php artisan key:generate
+
+echo "=== LARAVEL CONFIG CACHE ==="
+docker compose -f compose.dev.yaml exec workspace php artisan config:cache
+
+echo "=== DATABASE MIGRATE ==="
+docker compose -f compose.dev.yaml exec workspace php artisan migrate

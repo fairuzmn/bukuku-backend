@@ -168,3 +168,12 @@ The production image can be deployed to any Docker-compatible hosting environmen
 - **Docker Compose**: Orchestrates the services, simplifying the process of starting and stopping the environment.
 - **Health Checks**: Implemented in the Docker Compose configurations and Laravel application to ensure all services are operational.
 
+## Rate Limiting
+
+The application uses two rate-limit groups:
+
+| Name  | Limit            | Key Basis              | Purpose                                   |
+|-------|------------------|-------------------------|--------------------------------------------|
+| api   | 60 requests/min  | User ID, fallback to IP | General API traffic control                |
+| auth  | 5 requests/min   | IP                      | Strict protection for authentication/OTP   |
+

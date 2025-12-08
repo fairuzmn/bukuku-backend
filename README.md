@@ -177,3 +177,5 @@ The application uses two rate-limit groups:
 | api   | 60 requests/min  | User ID, fallback to IP | General API traffic control                |
 | auth  | 5 requests/min   | IP                      | Strict protection for authentication/OTP   |
 
+
+
